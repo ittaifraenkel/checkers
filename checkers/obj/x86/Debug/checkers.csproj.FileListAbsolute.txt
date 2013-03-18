@@ -1,0 +1,17 @@
+F:\computers\chekers\checkers\checkers\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.Form1.resources
+F:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.Properties.Resources.resources
+F:\computers\chekers\checkers\checkers\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\computers\chekers\checkers\checkers\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\computers\chekers\checkers\checkers\bin\Debug\checkers.exe
+F:\computers\chekers\checkers\checkers\bin\Debug\checkers.pdb
+F:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.exe
+F:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.pdb
+G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.exe
+G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.pdb
+G:\computers\chekers\checkers\checkers\bin\Debug\checkers.exe
+G:\computers\chekers\checkers\checkers\bin\Debug\checkers.pdb
+G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.csprojResolveAssemblyReference.cache
+G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.Form1.resources
+G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.Properties.Resources.resources
+G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.csproj.GenerateResource.Cache
