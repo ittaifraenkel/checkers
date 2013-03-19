@@ -85,7 +85,7 @@ namespace checkers
                 {
                     if (board[x, y] == 1)
                     {
-                        if (x > 0 && y < board.GetLength(1) - 1 && board[x - 1, y + 1] == 0)
+                        if (x > 0 && y < board.GetLength(1) - 1 && board[x - 1, y + 1] == 0) // move reg
                         {
                             bu[x - 1, y + 1].BackColor = Color.Green;
                         }
@@ -105,63 +105,181 @@ namespace checkers
                         oldy = y;
                         firclick = !firclick;
                     }
+                    if (board[x, y] == 11) //move queen
+                    {
+                        for (int i = x + 1, j = y + 1; i < board.GetLength(0) && j < board.GetLength(1); i++, j++) // down left
+                        {
+                            if (board[i, j] == 1 || board[i, j] == 11)
+                            {
+                                break;
+                            }
+                            if (board[i, j] == 2 || board[i, j] == 22)
+                            {
+                                if (j < board.GetLength(1) - 1 && i < board.GetLength(0) - 1 && board[i + 1, j + 1] == 0)
+                                {
+                                    bu[i + 1, j + 1].BackColor = Color.Green;
+                                }
+                                break;
+                            }
+                            bu[i, j].BackColor = Color.Green;
+                        }
+                        for (int i = x + 1, j = y - 1; i < board.GetLength(0) && j > -1; i++, j--) // down right
+                        {
+                            if (board[i, j] == 1 || board[i, j] == 11)
+                            {
+                                break;
+                            }
+                            if ((board[i, j] == 2 || board[i, j] == 22))
+                            {
+                                if (j > 0 && i < board.GetLength(0) - 1 && board[i + 1, j - 1] == 0)
+                                {
+                                    bu[i + 1, j - 1].BackColor = Color.Green;
+                                }
+                                break;
+                            }
+                            bu[i, j].BackColor = Color.Green;
+                        }
+                        for (int i = x - 1, j = y + 1; i > -1 && j < board.GetLength(1); i--, j++) // up left
+                        {
+                            if (board[i, j] == 1 || board[i, j] == 11)
+                            {
+                                break;
+                            }
+                            if (board[i, j] == 2 || board[i, j] == 22)
+                            {
+                                if (j < board.GetLength(1) - 1 && i > 0 && board[i - 1, j + 1] == 0)
+                                {
+                                    bu[i - 1, j + 1].BackColor = Color.Green;
+                                }
+                                break;
+                            }
+                            bu[i, j].BackColor = Color.Green;
+                        }
+                        for (int i = x - 1, j = y - 1; i > -1 && j > 0; i++, j--) // up right
+                        {
+                            if (board[i, j] == 1 || board[i, j] == 11)
+                            {
+                                break;
+                            }
+                            if (board[i, j] == 2 || board[i, j] == 22)
+                            {
+                                if (j > 0 && i > 0 && board[i - 1, j - 1] == 0)
+                                {
+                                    bu[i - 1, j - 1].BackColor = Color.Green;
+                                }
+                                break;
+                            }
+                            bu[i, j].BackColor = Color.Green;
+                        }
+                        oldx = x;
+                        oldy = y;
+                        firclick = !firclick;
+                    }
                 }
                 else
                 {
-                    if (board[x, y] == 1)
+                    if (board[x, y] == 1 || board[x, y] == 11)
                     {
-                        if (x > 0 && y < board.GetLength(1) - 1 && board[x - 1, y + 1] == 0)
+                        for (int i = 0; i < board.GetLength(0); i++)
                         {
-                            bu[x - 1, y + 1].BackColor = Color.White;
-                        }
-                        if (x > 0 && y > 0 && board[x - 1, y - 1] == 0)
-                        {
-                            bu[x - 1, y - 1].BackColor = Color.White;
-                        }
-                        if (x > 1 && y > 1 && (board[x - 1, y - 1] == 2 || board[x - 1, y - 1] == 22) && board[x - 2, y - 2] == 0)
-                        {
-                            bu[x - 2, y - 2].BackColor = Color.White;
-                        }
-                        if (x > 1 && y < board.GetLength(1) - 2 && (board[x - 1, y + 1] == 2 || board[x - 1, y + 1] == 22) && board[x - 2, y + 2] == 0)
-                        {
-                            bu[x - 2, y + 2].BackColor = Color.Green;
+                            for (int j = 0; j < board.GetLength(1); j++)
+                            {
+                                if (bu[i, j].BackColor == Color.Green)
+                                {
+                                    bu[i, j].BackColor = Color.White;
+                                }
+                            }
                         }
                         firclick = !firclick;
                     }
                     if (bu[x, y].BackColor == Color.Green)
                     {
-                        if (oldx > 0 && oldy < board.GetLength(1) - 1 && board[oldx - 1, oldy + 1] == 0)
+                        for (int i = 0; i < board.GetLength(0); i++)
                         {
-                            bu[oldx - 1, oldy + 1].BackColor = Color.White;
-                        }
-                        if (oldx > 0 && oldy > 0 && board[oldx - 1, oldy - 1] == 0)
-                        {
-                            bu[oldx - 1, oldy - 1].BackColor = Color.White;
-                        }
-                        if (oldx > 1 && oldy > 1 && (board[oldx - 1, oldy - 1] == 2 || board[oldx - 1, oldy - 1] == 22) && board[oldx - 2, oldy - 2] == 0)
-                        {
-                            bu[oldx - 2, oldy - 2].BackColor = Color.White;
-                        }
-                        if (oldx > 1 && oldy < board.GetLength(1) - 2 && (board[oldx - 1, oldy + 1] == 2 || board[oldx - 1, oldy + 1] == 22) && board[oldx - 2, oldy + 2] == 0)
-                        {
-                            bu[oldx - 2, oldy + 2].BackColor = Color.White;
+                            for (int j = 0; j < board.GetLength(1); j++)
+                            {
+                                if (bu[i, j].BackColor == Color.Green)
+                                {
+                                    bu[i, j].BackColor = Color.White;
+                                }
+                            }
                         }
                         tag = board[oldx, oldy];
-                        if (oldx - 2 == x)
+                        if (tag == 1) //eating reg
                         {
-                            if (oldy - 2 == y)
+                            if (oldx - 2 == x)
                             {
-                                bu[oldx - 1, oldy - 1].RemIm();
-                                board[oldx - 1, oldy - 1] = 0;
-                            }
-                            else
-                            {
-                                bu[oldx - 1, oldy + 1].RemIm();
-                                board[oldx - 1, oldy + 1] = 0;
+                                if (oldy - 2 == y)
+                                {
+                                    bu[oldx - 1, oldy - 1].RemIm();
+                                    board[oldx - 1, oldy - 1] = 0;
+                                }
+                                else
+                                {
+                                    bu[oldx - 1, oldy + 1].RemIm();
+                                    board[oldx - 1, oldy + 1] = 0;
+                                }
                             }
                         }
-                        bu[x, y].AddImX();
-                        board[x, y] = tag;
+                        if (tag == 11) //eating queen
+                        {
+                            int k;
+                            int i = oldx, j = oldy;
+                            if (x < i && y < j)
+                                for (k = 1; x + k < i && y + k < j; k++)
+                                    if (board[x + k, y + k] == 2 || board[x + k, y + k] == 22)
+                                    {
+                                        board[x + k, y + k] = 0;
+                                        bu[x + k, y + k].BackColor = Color.White;
+                                        bu[x + k, y + k].RemIm();
+                                        break;
+                                    }
+                            if (x < i && y > j)
+                                for (k = 1; x + k < i && y - k > j; k++)
+                                    if (board[x + k, y - k] == 2 || board[x + k, y - k] == 22)
+                                    {
+                                        board[x + k, y - k] = 0;
+                                        bu[x + k, y - k].BackColor = Color.White;
+                                        bu[x + k, y - k].RemIm();
+                                        break;
+                                    }
+                            if (x > i && y < j)
+                                for (k = 1; x - k > i && y + k < j; k++)
+                                    if (board[x - k, y + k] == 2 || board[x - k, y + k] == 22)
+                                    {
+                                        board[x - k, y + k] = 0;
+                                        bu[x - k, y + k].BackColor = Color.White;
+                                        bu[x - k, y + k].RemIm();
+                                        break;
+                                    }
+                            if (x > i && y > j)
+                                for (k = 1; x - k > i && y - k > j; k++)
+                                    if (board[x - k, y - k] == 2 || board[x - k, y - k] == 22)
+                                    {
+                                        board[x - k, y - k] = 0;
+                                        bu[x - k, y - k].BackColor = Color.White;
+                                        bu[x - k, y - k].RemIm();
+                                        break;
+                                    }
+                        }
+                        if (x == 0) //moving the piece and erasing the old one
+                        {
+                            board[x, y] = 11;
+                            bu[x, y].AddImQX();
+                        }
+                        else
+                        {
+                            if (tag == 1)
+                            {
+                                bu[x, y].AddImX();
+                                board[x, y] = 1;
+                            }
+                            if (tag == 11)
+                            {
+                                bu[x, y].AddImQX();
+                                board[x, y] = 11;
+                            }
+                        }
                         bu[oldx, oldy].RemIm();
                         board[oldx, oldy] = 0;
                         turn = !turn;
@@ -195,63 +313,181 @@ namespace checkers
                         oldy = y;
                         firclick = !firclick;
                     }
+                    if (board[x, y] == 22) //move queen
+                    {
+                        for (int i = x + 1, j = y + 1; i < board.GetLength(0) && j < board.GetLength(1); i++, j++) // down left
+                        {
+                            if (board[i, j] == 2 || board[i, j] == 22)
+                            {
+                                break;
+                            }
+                            if (board[i, j] == 1 || board[i, j] == 11)
+                            {
+                                if (j < board.GetLength(1) - 1 && i < board.GetLength(0) - 1 && board[i + 1, j + 1] == 0)
+                                {
+                                    bu[i + 1, j + 1].BackColor = Color.Green;
+                                }
+                                break;
+                            }
+                            bu[i, j].BackColor = Color.Green;
+                        }
+                        for (int i = x + 1, j = y - 1; i < board.GetLength(0) && j > -1; i++, j--) // down right
+                        {
+                            if (board[i, j] == 2 || board[i, j] == 22)
+                            {
+                                break;
+                            }
+                            if ((board[i, j] == 1 || board[i, j] == 11))
+                            {
+                                if (j > 0 && i < board.GetLength(0) - 1 && board[i + 1, j - 1] == 0)
+                                {
+                                    bu[i + 1, j - 1].BackColor = Color.Green;
+                                }
+                                break;
+                            }
+                            bu[i, j].BackColor = Color.Green;
+                        }
+                        for (int i = x - 1, j = y + 1; i > -1 && j < board.GetLength(1); i--, j++) // up left
+                        {
+                            if (board[i, j] == 2 || board[i, j] == 22)
+                            {
+                                break;
+                            }
+                            if (board[i, j] == 1 || board[i, j] == 11)
+                            {
+                                if (j < board.GetLength(1) - 1 && i > 0 && board[i - 1, j + 1] == 0)
+                                {
+                                    bu[i - 1, j + 1].BackColor = Color.Green;
+                                }
+                                break;
+                            }
+                            bu[i, j].BackColor = Color.Green;
+                        }
+                        for (int i = x - 1, j = y - 1; i > -1 && j > 0; i++, j--) // up right
+                        {
+                            if (board[i, j] == 2 || board[i, j] == 22)
+                            {
+                                break;
+                            }
+                            if (board[i, j] == 1 || board[i, j] == 11)
+                            {
+                                if (j > 0 && i > 0 && board[i - 1, j - 1] == 0)
+                                {
+                                    bu[i - 1, j - 1].BackColor = Color.Green;
+                                }
+                                break;
+                            }
+                            bu[i, j].BackColor = Color.Green;
+                        }
+                        oldx = x;
+                        oldy = y;
+                        firclick = !firclick;
+                    }
                 }
                 else
                 {
-                    if (board[x, y] == 2)
+                    if (board[x, y] == 2 || board[x, y] == 22)
                     {
-                        if (x < board.GetLength(0) - 1 && y < board.GetLength(1) - 1 && board[x + 1, y + 1] == 0)
+                        for (int i = 0; i < board.GetLength(0); i++)
                         {
-                            bu[x + 1, y + 1].BackColor = Color.White;
-                        }
-                        if (x < board.GetLength(0) - 1 && y > 0 && board[x + 1, y - 1] == 0)
-                        {
-                            bu[x + 1, y - 1].BackColor = Color.White;
-                        }
-                        if (x < board.GetLength(0) - 2 && y > 1 && (board[x - 1, y - 1] == 1 || board[x + 1, y - 1] == 11) && board[x + 2, y - 2] == 0)
-                        {
-                            bu[x + 2, y - 2].BackColor = Color.White;
-                        }
-                        if (x < board.GetLength(0) - 2 && y < board.GetLength(1) - 2 && (board[x + 1, y + 1] == 1 || board[x + 1, y + 1] == 11) && board[x + 2, y + 2] == 0)
-                        {
-                            bu[x + 2, y + 2].BackColor = Color.Green;
+                            for (int j = 0; j < board.GetLength(1); j++)
+                            {
+                                if (bu[i, j].BackColor == Color.Green)
+                                {
+                                    bu[i, j].BackColor = Color.White;
+                                }
+                            }
                         }
                         firclick = !firclick;
                     }
                     if (bu[x, y].BackColor == Color.Green)
                     {
-                        if (oldx < board.GetLength(0) - 1 && oldy < board.GetLength(1) - 1 && board[oldx + 1, oldy + 1] == 0)
+                        for (int i = 0; i < board.GetLength(0); i++)
                         {
-                            bu[oldx + 1, oldy + 1].BackColor = Color.White;
-                        }
-                        if (oldx < board.GetLength(0) - 1 && oldy > 0 && board[oldx + 1, oldy - 1] == 0)
-                        {
-                            bu[oldx + 1, oldy - 1].BackColor = Color.White;
-                        }
-                        if (oldx < board.GetLength(0) - 2 && oldy > 1 && (board[oldx + 1, oldy - 1] == 1 || board[oldx + 1, oldy - 1] == 11) && board[oldx + 2, oldy - 2] == 0)
-                        {
-                            bu[oldx + 2, oldy - 2].BackColor = Color.White;
-                        }
-                        if (oldx < board.GetLength(0) - 2 && oldy < board.GetLength(1) - 2 && (board[oldx + 1, oldy + 1] == 1 || board[oldx + 1, oldy + 1] == 11) && board[oldx + 2, oldy + 2] == 0)
-                        {
-                            bu[oldx + 2, oldy + 2].BackColor = Color.White;
+                            for (int j = 0; j < board.GetLength(1); j++)
+                            {
+                                if (bu[i, j].BackColor == Color.Green)
+                                {
+                                    bu[i, j].BackColor = Color.White;
+                                }
+                            }
                         }
                         tag = board[oldx, oldy];
-                        if (oldx + 2 == x)
+                        if (tag == 2) //eating reg
                         {
-                            if (oldy - 2 == y)
+                            if (oldx + 2 == x) 
                             {
-                                bu[oldx + 1, oldy - 1].RemIm();
-                                board[oldx + 1, oldy - 1] = 0;
-                            }
-                            else
-                            {
-                                bu[oldx + 1, oldy + 1].RemIm();
-                                board[oldx + 1, oldy + 1] = 0;
+                                if (oldy - 2 == y)
+                                {
+                                    bu[oldx + 1, oldy - 1].RemIm();
+                                    board[oldx + 1, oldy - 1] = 0;
+                                }
+                                else
+                                {
+                                    bu[oldx + 1, oldy + 1].RemIm();
+                                    board[oldx + 1, oldy + 1] = 0;
+                                }
                             }
                         }
-                        bu[x, y].AddImO();
-                        board[x, y] = tag;
+                        if (tag == 22) //eating queen
+                        {
+                            int k;
+                            int i = oldx, j = oldy;
+                            if (x < i && y < j)
+                                for (k = 1; x + k < i && y + k < j; k++)
+                                    if (board[x + k, y + k] == 1 || board[x + k, y + k] == 11)
+                                    {
+                                        board[x + k, y + k] = 0;
+                                        bu[x + k, y + k].BackColor = Color.White;
+                                        bu[x + k, y + k].RemIm();
+                                        break;
+                                    }
+                            if (x < i && y > j)
+                                for (k = 1; x + k < i && y - k > j; k++)
+                                    if (board[x + k, y - k] == 1 || board[x + k, y - k] == 11)
+                                    {
+                                        board[x + k, y - k] = 0;
+                                        bu[x + k, y - k].BackColor = Color.White;
+                                        bu[x + k, y - k].RemIm();
+                                        break;
+                                    }
+                            if (x > i && y < j)
+                                for (k = 1; x - k > i && y + k < j; k++)
+                                    if (board[x - k, y + k] == 1 || board[x - k, y + k] == 11)
+                                    {
+                                        board[x - k, y + k] = 0;
+                                        bu[x - k, y + k].BackColor = Color.White;
+                                        bu[x - k, y + k].RemIm();
+                                        break;
+                                    }
+                            if (x > i && y > j)
+                                for (k = 1; x - k > i && y - k > j; k++)
+                                    if (board[x - k, y - k] == 1 || board[x - k, y - k] == 11)
+                                    {
+                                        board[x - k, y - k] = 0;
+                                        bu[x - k, y - k].BackColor = Color.White;
+                                        bu[x - k, y - k].RemIm();
+                                        break;
+                                    }
+                        }
+                        if (x == 7) //moving the piece and erasing the old one
+                        {
+                            board[x, y] = 22;
+                            bu[x, y].AddImQO();
+                        }
+                        else
+                        {
+                            if (tag == 2)
+                            {
+                                bu[x, y].AddImO();
+                                board[x, y] = 2;
+                            }
+                            if (tag == 22)
+                            {
+                                bu[x, y].AddImQO();
+                                board[x, y] = 22;
+                            }
+                        }
                         bu[oldx, oldy].RemIm();
                         board[oldx, oldy] = 0;
                         turn = !turn;
