@@ -15,3 +15,4 @@ G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.csprojResolveAssem
 G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.Form1.resources
 G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.Properties.Resources.resources
 G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.csproj.GenerateResource.Cache
+G:\computers\chekers\checkers\checkers\obj\x86\Debug\checkers.Board.resources
