@@ -52,7 +52,7 @@ namespace checkers
                     if ((i + j) % 2 == 1)
                     {
                         bu[i, j].BackColor = Color.FromArgb(250, 0, 0);
-                        bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(170, 0, 0);
+                        bu[i, j].Enabled = false;
                     }
                     else
                     {
@@ -106,18 +106,22 @@ namespace checkers
                         if (x > 0 && y < board.GetLength(1) - 1 && board[x - 1, y + 1] == 0) // move reg
                         {
                             bu[x - 1, y + 1].BackColor = Color.Green;
+                            bu[x - 1, y + 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         if (x > 0 && y > 0 && board[x - 1, y - 1] == 0)
                         {
                             bu[x - 1, y - 1].BackColor = Color.Green;
+                            bu[x - 1, y - 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         if (x > 1 && y > 1 && (board[x - 1, y - 1] == 2 || board[x - 1, y - 1] == 22) && board[x - 2, y - 2] == 0)
                         {
                             bu[x - 2, y - 2].BackColor = Color.Green;
+                            bu[x - 2, y - 2].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         if (x > 1 && y < board.GetLength(1) - 2 && (board[x - 1, y + 1] == 2 || board[x - 1, y + 1] == 22) && board[x - 2, y + 2] == 0)
                         {
                             bu[x - 2, y + 2].BackColor = Color.Green;
+                            bu[x - 2, y + 2].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         oldx = x;
                         oldy = y;
@@ -136,10 +140,12 @@ namespace checkers
                                 if (j < board.GetLength(1) - 1 && i < board.GetLength(0) - 1 && board[i + 1, j + 1] == 0)
                                 {
                                     bu[i + 1, j + 1].BackColor = Color.Green;
+                                    bu[i + 1, j + 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 }
                                 break;
                             }
                             bu[i, j].BackColor = Color.Green;
+                            bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         for (int i = x + 1, j = y - 1; i < board.GetLength(0) && j > -1; i++, j--) // down right
                         {
@@ -152,10 +158,12 @@ namespace checkers
                                 if (j > 0 && i < board.GetLength(0) - 1 && board[i + 1, j - 1] == 0)
                                 {
                                     bu[i + 1, j - 1].BackColor = Color.Green;
+                                    bu[i + 1, j - 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 }
                                 break;
                             }
                             bu[i, j].BackColor = Color.Green;
+                            bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         for (int i = x - 1, j = y + 1; i > -1 && j < board.GetLength(1); i--, j++) // up left
                         {
@@ -168,10 +176,12 @@ namespace checkers
                                 if (j < board.GetLength(1) - 1 && i > 0 && board[i - 1, j + 1] == 0)
                                 {
                                     bu[i - 1, j + 1].BackColor = Color.Green;
+                                    bu[i - 1, j + 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 }
                                 break;
                             }
                             bu[i, j].BackColor = Color.Green;
+                            bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         for (int i = x - 1, j = y - 1; i > -1 && j > -1; i--, j--) // up right
                         {
@@ -184,10 +194,12 @@ namespace checkers
                                 if (j > 0 && i > 0 && board[i - 1, j - 1] == 0)
                                 {
                                     bu[i - 1, j - 1].BackColor = Color.Green;
+                                    bu[i - 1, j - 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 }
                                 break;
                             }
                             bu[i, j].BackColor = Color.Green;
+                            bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         oldx = x;
                         oldy = y;
@@ -219,6 +231,7 @@ namespace checkers
                                 if (bu[i, j].BackColor == Color.Green)
                                 {
                                     bu[i, j].BackColor = Color.White;
+                                    bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(170, 170, 170);
                                 }
                             }
                         }
@@ -241,6 +254,7 @@ namespace checkers
                                     board[x + k, y + k] = 0;
                                     bu[x + k, y + k].BackColor = Color.White;
                                     bu[x + k, y + k].RemIm();
+                                    chechain = true;
                                 }
                             }
                             if (x < i && y > j)
@@ -249,6 +263,7 @@ namespace checkers
                                         board[x + k, y - k] = 0;
                                         bu[x + k, y - k].BackColor = Color.White;
                                         bu[x + k, y - k].RemIm();
+                                        chechain = true;
                                     }
                             if (x > i && y < j)
                                     if (board[x - k, y + k] == 2 || board[x - k, y + k] == 22)
@@ -256,6 +271,7 @@ namespace checkers
                                         board[x - k, y + k] = 0;
                                         bu[x - k, y + k].BackColor = Color.White;
                                         bu[x - k, y + k].RemIm();
+                                        chechain = true;
                                     }
                             if (x > i && y > j)
                                     if (board[x - k, y - k] == 2 || board[x - k, y - k] == 22)
@@ -263,6 +279,7 @@ namespace checkers
                                         board[x - k, y - k] = 0;
                                         bu[x - k, y - k].BackColor = Color.White;
                                         bu[x - k, y - k].RemIm();
+                                        chechain = true;
                                     }
                         }
                         if (x == 0) //moving the piece and erasing the old one
@@ -322,18 +339,22 @@ namespace checkers
                         if (x < board.GetLength(0) - 1 && y < board.GetLength(1) - 1 && board[x + 1, y + 1] == 0)
                         {
                             bu[x + 1, y + 1].BackColor = Color.Green;
+                            bu[x + 1, y + 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         if (x < board.GetLength(0) - 1 && y > 0 && board[x + 1, y - 1] == 0)
                         {
                             bu[x + 1, y - 1].BackColor = Color.Green;
+                            bu[x + 1, y - 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         if (x < board.GetLength(0) - 2 && y > 1 && (board[x + 1, y - 1] == 1 || board[x + 1, y - 1] == 11) && board[x + 2, y - 2] == 0)
                         {
                             bu[x + 2, y - 2].BackColor = Color.Green;
+                            bu[x + 2, y - 2].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         if (x < board.GetLength(0) - 2 && y < board.GetLength(1) - 2 && (board[x + 1, y + 1] == 1 || board[x + 1, y + 1] == 11) && board[x + 2, y + 2] == 0)
                         {
                             bu[x + 2, y + 2].BackColor = Color.Green;
+                            bu[x + 2, y + 2].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         oldx = x;
                         oldy = y;
@@ -352,10 +373,12 @@ namespace checkers
                                 if (j < board.GetLength(1) - 1 && i < board.GetLength(0) - 1 && board[i + 1, j + 1] == 0)
                                 {
                                     bu[i + 1, j + 1].BackColor = Color.Green;
+                                    bu[i + 1, j + 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 }
                                 break;
                             }
                             bu[i, j].BackColor = Color.Green;
+                            bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         for (int i = x + 1, j = y - 1; i < board.GetLength(0) && j > -1; i++, j--) // down right
                         {
@@ -368,10 +391,12 @@ namespace checkers
                                 if (j > 0 && i < board.GetLength(0) - 1 && board[i + 1, j - 1] == 0)
                                 {
                                     bu[i + 1, j - 1].BackColor = Color.Green;
+                                    bu[i + 1, j - 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 }
                                 break;
                             }
                             bu[i, j].BackColor = Color.Green;
+                            bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         for (int i = x - 1, j = y + 1; i > -1 && j < board.GetLength(1); i--, j++) // up left
                         {
@@ -384,10 +409,12 @@ namespace checkers
                                 if (j < board.GetLength(1) - 1 && i > 0 && board[i - 1, j + 1] == 0)
                                 {
                                     bu[i - 1, j + 1].BackColor = Color.Green;
+                                    bu[i - 1, j + 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 }
                                 break;
                             }
                             bu[i, j].BackColor = Color.Green;
+                            bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         for (int i = x - 1, j = y - 1; i > -1 && j > -1; i--, j--) // up right
                         {
@@ -400,10 +427,12 @@ namespace checkers
                                 if (j > 0 && i > 0 && board[i - 1, j - 1] == 0)
                                 {
                                     bu[i - 1, j - 1].BackColor = Color.Green;
+                                    bu[i - 1, j - 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 }
                                 break;
                             }
                             bu[i, j].BackColor = Color.Green;
+                            bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         }
                         oldx = x;
                         oldy = y;
@@ -435,6 +464,7 @@ namespace checkers
                                 if (bu[i, j].BackColor == Color.Green)
                                 {
                                     bu[i, j].BackColor = Color.White;
+                                    bu[i, j].FlatAppearance.MouseOverBackColor = Color.FromArgb(170, 170, 170);
                                 }
                             }
                         }
@@ -456,6 +486,7 @@ namespace checkers
                                         board[x + k, y + k] = 0;
                                         bu[x + k, y + k].BackColor = Color.White;
                                         bu[x + k, y + k].RemIm();
+                                        chechain = true;
                                     }
                             if (x < i && y > j)
                                     if (board[x + k, y - k] == 1 || board[x + k, y - k] == 11)
@@ -463,6 +494,7 @@ namespace checkers
                                         board[x + k, y - k] = 0;
                                         bu[x + k, y - k].BackColor = Color.White;
                                         bu[x + k, y - k].RemIm();
+                                        chechain = true;
                                     }
                             if (x > i && y < j)
                                     if (board[x - k, y + k] == 1 || board[x - k, y + k] == 11)
@@ -470,6 +502,7 @@ namespace checkers
                                         board[x - k, y + k] = 0;
                                         bu[x - k, y + k].BackColor = Color.White;
                                         bu[x - k, y + k].RemIm();
+                                        chechain = true;
                                     }
                             if (x > i && y > j)
                                     if (board[x - k, y - k] == 1 || board[x - k, y - k] == 11)
@@ -477,6 +510,7 @@ namespace checkers
                                         board[x - k, y - k] = 0;
                                         bu[x - k, y - k].BackColor = Color.White;
                                         bu[x - k, y - k].RemIm();
+                                        chechain = true;
                                     }
                         }
                         if (x == 7) //moving the piece and erasing the old one
@@ -529,18 +563,62 @@ namespace checkers
             }
         }
 
-        public void CheckWin(int nturn)
+        public void CheckWin(int other)
         {
             int i = 1, j = 1;
             bool t = false;
             for (i = 0; i < board.GetLength(0); i++)
             {
-                for (j = 0; j < board.GetLength(0); j++)
+                for(j=  0; j < board.GetLength(0); j++)
                 {
-                    if (board[i, j] == nturn || board[i, j] == nturn * 11)
+                    if (board[i, j] == other || board[i, j] == other * 11)
                     {
-                        t = true;
-                        break;
+                        if (other == 1)
+                        {
+                            if (i > 0 && j < board.GetLength(1) - 1 && board[i - 1, j + 1] == 0)
+                            {
+                                t = true;
+                                break;
+                            }
+                            if (i > 0 && j > 0 && board[i - 1, j - 1] == 0)
+                            {
+                                t = true;
+                                break;
+                            }
+                            if (i > 1 && j > 1 && (board[i - 1, j - 1] == other || board[i - 1, j - 1] == other * 11) && board[i - 2, j - 2] == 0)
+                            {
+                                t = true;
+                                break;
+                            }
+                            if (i > 1 && j < board.GetLength(1) - 2 && (board[i - 1, j + 1] == other || board[i - 1, j + 1] == other * 11) && board[i - 2, j + 2] == 0)
+                            {
+                                t = true;
+                                break;
+                            }
+                        }
+                        if (other == 2)
+                        {
+                            if (i < board.GetLength(0) - 1 && j < board.GetLength(1) - 1 && board[i + 1, j + 1] == 0)
+                            {
+                                t = true;
+                                break;
+                            }
+                            if (i < board.GetLength(0) - 1 && j > 0 && board[i + 1, j - 1] == 0)
+                            {
+                                t = true;
+                                break;
+                            }
+                            if (i < board.GetLength(0) - 2 && j > 1 && (board[i + 1, j - 1] == 1 || board[i + 1, j - 1] == 11) && board[i + 2, j - 2] == 0)
+                            {
+                                t = true;
+                                break;
+                            }
+                            if (i < board.GetLength(0) - 2 && j < board.GetLength(1) - 2 && (board[i + 1, j + 1] == 1 || board[i + 1, j + 1] == 11) && board[i + 2, j + 2] == 0)
+                            {
+                                t = true;
+                                break;
+                            }
+                        }
                     }
                 }
                 if (t)
@@ -548,12 +626,12 @@ namespace checkers
                     break;
                 }
             }
-            if (nturn == 1 && i == 8 && j == 8)
+            if (other == 1 && i == 8 && j == 8)
             {
                 MessageBox.Show(player2 + " won the game");
                 this.Close();
             }
-            if (nturn == 2 && i == 8 && j == 8)
+            if (other == 2 && i == 8 && j == 8)
             {
                 MessageBox.Show(player1 + " won the game");
                 this.Close();
@@ -579,6 +657,7 @@ namespace checkers
                     if (board[row + 2, col + 2] == 0 && (board[row + 1, col + 1] == other || board[row + 1, col + 1] == other * 11))
                     {
                         bu[row + 2, col + 2].BackColor = Color.Green;
+                        bu[row + 2, col + 2].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         devour = true;
                     }
                 }
@@ -587,6 +666,7 @@ namespace checkers
                     if (board[row + 2, col - 2] == 0 && (board[row + 1, col - 1] == other || board[row + 1, col - 1] == other * 11))
                     {
                         bu[row + 2, col - 2].BackColor = Color.Green;
+                        bu[row + 2, col - 2].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         devour = true;
                     }
                 }
@@ -595,6 +675,7 @@ namespace checkers
                     if (board[row - 2, col + 2] == 0 && (board[row - 1, col + 1] == other || board[row - 1, col + 1] == other * 11))
                     {
                         bu[row - 2, col + 2].BackColor = Color.Green;
+                        bu[row - 2, col + 2].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         devour = true;
                     }
                 }
@@ -603,6 +684,7 @@ namespace checkers
                     if (board[row - 2, col - 2] == 0 && (board[row - 1, col - 1] == other || board[row - 1, col - 1] == other * 11))
                     {
                         bu[row - 2, col - 2].BackColor = Color.Green;
+                        bu[row - 2, col - 2].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                         devour = true;
                     }
                 }
@@ -617,6 +699,7 @@ namespace checkers
                         if (board[row + k + 1, col + k + 1] == 0)
                         {
                             bu[row + k + 1, col + k + 1].BackColor = Color.Green;
+                            bu[row + k + 1, col + k + 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                             devour = true;
                             break;
                         }
@@ -631,6 +714,7 @@ namespace checkers
                             if (board[row + k + 1, col - k - 1] == 0)
                             {
                                 bu[row + k + 1, col - k - 1].BackColor = Color.Green;
+                                bu[row + k + 1, col - k - 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 devour = true;
                                 break;
                             }
@@ -645,6 +729,7 @@ namespace checkers
                             if (board[row - k - 1, col + k + 1] == 0)
                             {
                                 bu[row - k - 1, col + k + 1].BackColor = Color.Green;
+                                bu[row - k - 1, col + k + 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 devour = true;
                                 break;
                             }
@@ -659,6 +744,7 @@ namespace checkers
                             if (board[row - k - 1, col - k - 1] == 3)
                             {
                                 bu[row - k - 1, col - k - 1].BackColor = Color.Green;
+                                bu[row - k - 1, col - k - 1].FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 250, 0);
                                 devour = true;
                                 break;
                             }
